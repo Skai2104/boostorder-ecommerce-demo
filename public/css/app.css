@@ -10899,3 +10899,18 @@ a.text-dark:focus {
   }
 }
 
+.navbar {
+  min-height: 80px;
+}
+
+.img-product {
+  height: 250px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.card-title {
+  height: 60px;
+  font-size: 1rem;
+}
+
