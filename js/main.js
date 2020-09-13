@@ -13,8 +13,6 @@ document.addEventListener('DOMContentLoaded', function () {
         cart = [];
     }
 
-    console.log(cart)
-
     // Update the cart amount
     updateCartAmount();
 })

@@ -57,6 +57,11 @@ $cart = json_decode($cart);
         ?>
     </div>
 </div>
+<div class="row justify-content-center mt-4">
+    <div class="col-auto">
+        <button class="btn btn-primary" onclick="submitOrder()">Submit Order</button>
+    </div>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="deleteCartItemModal" tabindex="-1" aria-labelledby="deleteCartItemModalLabel" aria-hidden="true">
@@ -137,7 +142,6 @@ $cart = json_decode($cart);
 
         // Loop through the cart array
         cart.forEach((element, index) => {
-            console.log(index)
             // If the current product ID in the cart array is equal to the target product ID
             if (element.productId === productId) {
                 // Remove the current item from the cart array
@@ -153,6 +157,16 @@ $cart = json_decode($cart);
 
         // Refresh the page to reflect the changes
         location.reload();
+    }
+
+    function submitOrder() {
+        $.post('api/submit-order.php', {
+            data: JSON.stringify(cart)
+        }, result => {
+            if (result === 'success') {
+                // Navigate to the orders page
+            }
+        });
     }
 </script>
 
