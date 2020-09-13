@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
     <a class="navbar-brand" href="#">Boostorder eCommerce Demo</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -22,19 +22,12 @@
       <ul class="navbar-nav ml-auto">
         <li class="nav-item mr-3">
           <a class="nav-link" href="#">
-            <i class="fas fa-shopping-cart fa-2x"></i>
-            <span class="badge badge-danger align-top">4</span>
+            <i class="fas fa-shopping-cart"></i>
+            <span id="badge-cart" class="badge badge-danger align-top"></span>
           </a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-user-circle fa-2x"></i>
-          </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">View Orders</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Logout</a>
-          </div>
+        <li class="nav-item">
+          <a class="btn btn-primary" href="#">My Orders</a>
         </li>
       </ul>
     </div>
