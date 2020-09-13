@@ -120,24 +120,24 @@ $data = getProducts($page);
     foreach ($data['products'] as $product) {
         echo
             '<div class="col-3 mb-4">
-            <div class="card text-center">
-                <div class="card-body">
-                    <img src="' . $product->images[0]->src . '" class="card-img-top img-product">
-                    <h5 class="card-title text-product-name">' . $product->name . '</h5>
-                    <small>Quantity:</small>
-                    <div class="input-group mb-4 w-50 mx-auto">
-                        <div class="input-group-prepend">
-                            <button class="btn btn-sm btn-outline-secondary" type="button" id="button-addon1" onclick="updateQty(\'input-' . $product->id . '\', false)">-</button>
+                <div class="card text-center shadow">
+                    <div class="card-body">
+                        <img src="' . $product->images[0]->src . '" class="card-img-top img-product">
+                        <h5 class="card-title text-product-name">' . $product->name . '</h5>
+                        <small>Quantity:</small>
+                        <div class="input-group mb-4 w-50 mx-auto">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-sm btn-outline-secondary" type="button" id="button-addon1" onclick="updateQty(\'input-' . $product->id . '\', false)">-</button>
+                            </div>
+                            <input id="input-' . $product->id . '" type="text" class="form-control text-center" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" value="1">
+                            <div class="input-group-append">
+                                <button class="btn btn-sm btn-outline-secondary" type="button" id="button-addon1" onclick="updateQty(\'input-' . $product->id . '\', true)">+</button>
+                            </div>
                         </div>
-                        <input id="input-' . $product->id . '" type="text" class="form-control text-center" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" value="1">
-                        <div class="input-group-append">
-                            <button class="btn btn-sm btn-outline-secondary" type="button" id="button-addon1" onclick="updateQty(\'input-' . $product->id . '\', true)">+</button>
-                        </div>
+                        <a href="#" class="btn btn-primary" onclick="addToCart(\'' . $product->id . '\',\'' . $product->name . '\', \'' . $product->images[0]->src . '\')">Add to Cart</a>
                     </div>
-                    <a href="#" class="btn btn-primary" onclick="addToCart(\'' . $product->id . '\',\'' . $product->name . '\', \'' . $product->images[0]->src . '\')">Add to Cart</a>
                 </div>
-            </div>
-        </div>';
+            </div>';
     }
     ?>
 </div>
@@ -173,26 +173,6 @@ $data = getProducts($page);
 </nav>
 
 <script>
-    var cart;
-
-    document.addEventListener('DOMContentLoaded', function() {
-        // Get the cart data from the local storage
-        var cartData = localStorage.getItem('cart');
-
-        // If the cart data is not null
-        if (cartData) {
-            // Set the value to the cart variable
-            cart = JSON.parse(cartData);
-        } else {
-            // Initiate the cart array
-            cart = [];
-        }
-
-        console.log(cart)
-
-        updateCartAmount();
-    })
-
     function updateQty(inputId, increment) {
         // Get the target input by using its ID
         var targetInput = document.getElementById(inputId);
@@ -226,32 +206,14 @@ $data = getProducts($page);
         // Add the cartItem to the cart array
         cart.push(cartItem);
 
-        // Convert the cart into JSON string and save it in the local storage
-        localStorage.setItem('cart', JSON.stringify(cart));
+        // Convert the cart into JSON string and save it in the cookie
+        document.cookie = 'cart=' + JSON.stringify(cart);
 
         // Update the cart amount
         updateCartAmount();
 
         // Reset the quantity input to 1
         document.getElementById(inputId).value = 1;
-    }
-
-    function updateCartAmount() {
-        // Get the cart badge
-        var cartBadge = document.getElementById('badge-cart');
-
-        var totalAmount = 0;
-
-        if (cart.length) {
-            // Count the quantity of the items in the cart
-            cart.forEach(element => {
-                // Add the qty to the total amount
-                totalAmount += parseInt(element.qty);
-            });
-
-            // Update the cart badge
-            cartBadge.innerHTML = totalAmount;
-        }
     }
 </script>
 
