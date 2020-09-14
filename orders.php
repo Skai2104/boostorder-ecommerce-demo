@@ -45,7 +45,7 @@ require "api/get-orders.php";
                     }
 
                     echo '
-                        <div class="card shadow mb-4">
+                        <div class="card shadow mb-4 card-order" title="Click for details" onclick="viewOrderDetails(\'' . $item->order_id . '\')">
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col">
@@ -73,7 +73,7 @@ require "api/get-orders.php";
                                 <img class="img-product-cart" src="' . $item->product_img . '">
                             </div>
                             <div class="col-auto d-flex align-items-center">
-                                <h5>' . $item->product_name . '</h5>
+                                <h5 class="mb-0">' . $item->product_name . '</h5>
                             </div>
                             <div class="col-2 d-flex align-items-center">
                                 x' . $item->quantity . '
@@ -131,6 +131,13 @@ require "api/get-orders.php";
                 alert('An error has occurred, please try again.');
             }
         });
+    }
+
+    function viewOrderDetails(orderId) {
+        // Redirect to the order details page
+        var url = 'orderDetails.php?orderId=' + orderId;
+
+        location.assign(url);
     }
 </script>
 

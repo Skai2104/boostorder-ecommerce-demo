@@ -20,4 +20,6 @@ if (isset($_POST['orderId']) && isset($_POST['orderStatus'])) {
     } else {
         echo "failed: " . mysqli_error($con);
     }
+
+    mysqli_close($con);
 }

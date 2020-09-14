@@ -26,6 +26,13 @@
             <span id="badge-cart" class="badge badge-danger align-top"></span>
           </a>
         </li>
+        <li class="nav-item dropdown mr-3">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-bell"></i>
+            <span id="badge-notification" id="badge-cart" class="badge badge-danger align-top"></span>
+          </a>
+          <div id="dropdown-notification" class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"></div>
+        </li>
         <li class="nav-item">
           <a class="btn btn-primary" href="orders.php">My Orders</a>
         </li>
