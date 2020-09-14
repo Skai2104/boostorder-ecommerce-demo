@@ -6,7 +6,7 @@ if (isset($_POST['orderId']) && isset($_POST['orderStatus'])) {
     $orderStatus = $_POST['orderStatus'];
 
     // Get the new status based on the type of status update request (request for return/refund or cancel)
-    $newStatus = $orderStatus === "Completed" ? "Requested for Return/Refund" : "Cancelled";
+    $newStatus = $orderStatus === "Processing" ? "Cancelled" : "Requested for Return/Refund";
 
     $query = "UPDATE orders SET status = '$newStatus' WHERE order_id = '$orderId'";
 
