@@ -42,9 +42,18 @@ $cart = json_decode($cart);
                                 </button>
                             </div>
                         </div>
-                    </div>
+                    </div>                    
                 ';
             }
+
+            echo '
+                 <div class="row justify-content-center mt-4">
+                    <div class="col-auto">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#submitOrderModal">Submit Order</button>
+                    </div>
+                </div>
+            ';
+
         } else {
             // Else show the message
             echo '
@@ -55,11 +64,6 @@ $cart = json_decode($cart);
             ';
         }
         ?>
-    </div>
-</div>
-<div class="row justify-content-center mt-4">
-    <div class="col-auto">
-        <button class="btn btn-primary" onclick="submitOrder()">Submit Order</button>
     </div>
 </div>
 
@@ -81,6 +85,26 @@ $cart = json_decode($cart);
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-danger" onclick="deleteCartItem()">Remove</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="submitOrderModal" tabindex="-1" aria-labelledby="submitOrderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Submit Order</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                The order will be submitted, please confirm your order
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="submitOrder()">Place Order</button>
             </div>
         </div>
     </div>
@@ -163,8 +187,15 @@ $cart = json_decode($cart);
         $.post('api/submit-order.php', {
             data: JSON.stringify(cart)
         }, result => {
-            if (result === 'success') {
+            if (result === 'submitted') {
+                // Empty the cart
+                cart = [];
+
+                // Update the cookie
+                document.cookie = 'cart=' + JSON.stringify(cart);
+
                 // Navigate to the orders page
+                location.assign('orders.php');
             }
         });
     }
